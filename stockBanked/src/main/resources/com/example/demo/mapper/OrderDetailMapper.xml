@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.OrderDetailMapper">
+    <select id="getDetail" resultType="com.example.demo.entity.OrderDetailView">
+        select * from order_detail_view
+        <where>
+            <if test="order_id!=null and order_id!=''">
+                order_id=#{order_id}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertOrderDetail">
+        insert into order_details(order_id,book_id,quantity,total_price)
+        values(#{order_id},#{book_id},#{quantity},#{total_price})
+    </insert>
+</mapper>
+

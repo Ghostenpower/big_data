@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.StockMapper">
+
+    <select id="getOneStockInfo" resultType="com.example.demo.entity.StockInfo">
+        SELECT *
+        FROM stock_info
+        <where>
+            <if test="ts_code!=null and ts_code!=''">
+                ts_code=#{ts_code}
+            </if>
+            <if test="name!=null and name!=''">
+                and name=#{name}
+            </if>
+        </where>
+    </select>
+
+    <select id="getStockInfoByIndustry" resultType="com.example.demo.entity.StockInfo">
+        select *
+        from stock_info
+        <where>
+            <if test="industry!=null and industry!=''">
+                industry=#{industry}
+            </if>
+        </where>
+    </select>
+    <select id="getNewIndexData" resultType="com.example.demo.entity.IndexDaily">
+        select *
+        from index_daily
+        where ts_code=#{ts_code}
+        order by trade_date desc
+        limit 2
+    </select>
+    <select id="getAllIndexData" resultType="com.example.demo.entity.IndexDaily">
+            select *
+            from index_daily
+    </select>
+    <select id="getAllStockInfo" resultType="com.example.demo.entity.StockInfo">
+        SELECT *
+        FROM stock_info
+    </select>
+    <select id="getHighHeatSector" resultType="com.example.demo.entity.SectorInfo">
+            SELECT industry,
+                   count(industry) AS count,
+                   count(industry) FILTER ( WHERE close_price_change_percentage > 2 ) AS count_over_2,
+                   count(industry) FILTER ( WHERE close_price_change_percentage > 5 ) AS high_heat_count
+            FROM stock_daily_data
+            GROUP BY industry
+            ORDER BY count_over_2 DESC
+    </select>
+</mapper>

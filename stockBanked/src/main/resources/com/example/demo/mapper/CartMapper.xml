@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.CartMapper">
+    <select id="getCart" resultType="com.example.demo.entity.CartView">
+        select * from cart_view
+        <where>
+            <if test="cart_id!=null and cart_id!=''">
+                cart_id=#{cart_id}
+            </if>
+            <if test="book_id!=null and book_id!=''">
+                and book_id=#{book_id}
+            </if>
+            <if test="is_choose!=null and is_choose!=''">
+                and is_choose=#{is_choose}
+            </if>
+        </where>
+    </select>
+    <insert id="addCart">
+        insert into shopping_cart(cart_id,book_id,quantity,total_price)
+        values(#{cart_id},#{book_id},#{quantity},#{total_price})
+    </insert>
+    <update id="updateCart">
+        update shopping_cart set
+        quantity = #{quantity},
+        total_price = #{total_price}
+        where cart_id=#{cart_id} and book_id=#{book_id}
+    </update>
+</mapper>

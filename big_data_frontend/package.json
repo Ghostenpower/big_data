@@ -1,0 +1,26 @@
+{
+  "name": "big_data_frontend",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "axios": "^1.7.7",
+    "bootstrap": "^5.3.0-alpha1",
+    "echarts": "^5.5.1",
+    "echarts-wordcloud": "^2.1.0",
+    "element-plus": "^2.8.8",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "vite": "^5.1.5"
+  }
+}
